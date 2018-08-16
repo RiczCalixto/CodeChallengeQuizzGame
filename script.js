@@ -331,40 +331,44 @@ c) correct answer (I would use a number for this)
 7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
 */
 
-var Question = function (question, options, answer){
-    this.question = question;
-    this.options = options;
-    this.answer = answer;
-}
+(function (){
 
-var comida = new Question ('Qual a melhor comida do mundo?', [' 0 - Jiló', ' 1 - melão', ' 2 - brigadeiro'], 2)
-var casa = new Question ('Onde gostaria de morar?', [' 0 - Africa do Sul', ' 1 - Canadá', ' 2 - Brasil'], 1)
-var peso = new Question ('De acordo com o nutricionista, qual o seu peso ideal?', [' 0 - 83 Kg', ' 1 - 100 Kg', ' 2 - 70 Kg'], 0)
-
-var qAll = [comida, casa, peso];
-
-var n = Math.floor(Math.random() * qAll.length);
-
-Question.prototype.displayQuestion = function (){
-    console.log(this.question);
-    for (var i = 0; i < this.options.length; i++){
-        console.log(this.options[i]);
+    var Question = function (question, options, answer){
+        this.question = question;
+        this.options = options;
+        this.answer = answer;
     }
     
-}
-
-Question.prototype.checkAnswer = function (ans){
-    if (janelaResposta === this.answer){
-        console.log("CORRECT!")
-    } else {
-        console.log("wrong")
+    var comida = new Question ('Qual a melhor comida do mundo?', [' 0 - Jiló', ' 1 - melão', ' 2 - brigadeiro'], 2)
+    var casa = new Question ('Onde gostaria de morar?', [' 0 - Africa do Sul', ' 1 - Canadá', ' 2 - Brasil'], 1)
+    var peso = new Question ('De acordo com o nutricionista, qual o seu peso ideal?', [' 0 - 83 Kg', ' 1 - 100 Kg', ' 2 - 70 Kg'], 0)
+    
+    var qAll = [comida, casa, peso];
+    
+    var n = Math.floor(Math.random() * qAll.length);
+    
+    Question.prototype.displayQuestion = function (){
+        console.log(this.question);
+        for (var i = 0; i < this.options.length; i++){
+            console.log(this.options[i]);
+        }
+        
     }
-}
+    
+    Question.prototype.checkAnswer = function (ans){
+        if (janelaResposta === this.answer){
+            console.log("CORRECT!")
+        } else {
+            console.log("wrong")
+        }
+    }
+    
+    qAll[n].displayQuestion();
+    
+    var janelaResposta = parseInt (prompt
+        ("What is the correct answer?")
+    ); //esse parseInt transforma uma string em número
+    
+    qAll[n].checkAnswer(janelaResposta);
 
-qAll[n].displayQuestion();
-
-var janelaResposta = parseInt (prompt
-    ("What is the correct answer?")
-); //esse parseInt transforma uma string em número
-
-qAll[n].checkAnswer(janelaResposta);
+})();
